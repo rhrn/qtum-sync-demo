@@ -1,0 +1,46 @@
+{
+  "name": "qtum-sync",
+  "version": "1.0.0",
+  "description": "Qtum sync microservice",
+  "main": "index.js",
+  "dependencies": {
+    "@nestjs/common": "^5.1.0",
+    "@nestjs/core": "^5.1.0",
+    "@types/isomorphic-fetch": "0.0.34",
+    "isomorphic-fetch": "^2.2.1",
+    "reflect-metadata": "^0.1.12",
+    "rxjs": "^6.2.1"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^5.1.0",
+    "@types/jest": "^23.1.4",
+    "@types/nock": "^9.3.0",
+    "jest": "^23.3.0",
+    "nock": "^9.4.1",
+    "ts-jest": "^23.0.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "qtum",
+    "sync",
+    "microservice"
+  ],
+  "author": "@rhrn",
+  "license": "BSD"
+}
