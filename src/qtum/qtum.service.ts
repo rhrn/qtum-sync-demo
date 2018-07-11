@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '../packages/config-nest';
 import { HttpService } from '../packages/isomorphic-fetch-nest';
-
-const url = 'http://test2:test1234@192.168.1.150:3889';
 
 type json = any;
 
@@ -10,9 +9,10 @@ export class QtumService {
   url: string;
 
   constructor(
+    private readonly configService: ConfigService,
     private readonly httpService: HttpService
   ) {
-    this.url = url;
+    this.url = this.configService.get('QTUM_URL')
   }
 
   async rpc(cmd): Promise<json> {

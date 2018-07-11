@@ -1,5 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { HttpModule } from '../packages/isomorphic-fetch-nest';
+import { ConfigModule } from '../packages/config-nest';
 import { QtumService } from './qtum.service';
 
 import nock, { back } from 'nock';
@@ -23,7 +24,7 @@ describe('QtumService', () => {
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [QtumService],
-      imports: [HttpModule]
+      imports: [HttpModule, ConfigModule]
     }).compile();
 
     qtumService = module.get<QtumService>(QtumService);
