@@ -1,0 +1,18 @@
+version: '3.6'
+
+volumes:
+  mongo_data:
+
+services:
+  mongo1:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '2'

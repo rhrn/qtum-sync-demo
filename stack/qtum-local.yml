@@ -1,0 +1,40 @@
+version: '3.6'
+
+volumes:
+  qtum_data:
+    driver: local
+
+services:
+  
+  qtum:
+    image: qtum/qtum
+    command: >
+      qtumd
+      -server=1
+      -rpcuser=test2
+      -rpcpassword=test1234
+      -rpcbind=0.0.0.0
+      -rpcallowip=0.0.0.0/0
+      -rpcport=3889
+      -addnode=220.176.167.48
+      -addnode=35.186.175.228
+      -addnode=5.175.19.18
+      -whitelist=127.0.0.1
+      -txindex=1
+      -addressindex=1
+      -timestampindex=1
+      -spentindex=1
+      -zmqpubrawtx=tcp://127.0.0.1:28332
+      -zmqpubhashblock=tcp://127.0.0.1:28332
+      -reindex=1
+      -gen=0
+      -peer=true
+      -addrindex=1
+      -logevents=1
+      -debug=net
+    ports:
+      - 3888:3888
+      - 3889:3889
+    restart: unless-stopped
+    volumes:
+      - ${VOLUME:-qtum_data}:/root
