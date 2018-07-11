@@ -24,24 +24,22 @@ describe('StorageService', () => {
   describe('MetaSchema Qtum', () => {
     const update = { currentBlock: 1 };
 
-    it('update', async () => {
+    it('qtumMeta(update)', async () => {
       const result = await storageService.qtumMeta(update)
       expect(result.get('currentBlock')).toEqual(update.currentBlock)
     })
 
-    it('get', async () => {
+    it('qtumMeta()', async () => {
       const result = await storageService.qtumMeta()
       expect(result.get('currentBlock')).toEqual(update.currentBlock)
     })
   })
 
-  describe('addBlock', () => {
-    it('add first block', async () => {
-
+  describe('BlockSchema', () => {
+    it('addBlock(block)', async () => {
       const block = {
         hash: "test_block"
       };
-
       const result = await storageService.addBlock(block)
       expect(result.hash).toEqual(block.hash)
     });
