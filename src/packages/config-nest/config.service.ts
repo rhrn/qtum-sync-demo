@@ -4,12 +4,18 @@ export class ConfigService {
   private readonly config: { [prop: string]: string };
 
   constructor(filePath: string) {
-    const { error, parsed: env } = dotenv.config({ path: filePath });
-    const { parsed: defaultConf } = dotenv.config({ path: 'default.env' });
+    let { error, parsed: env } = dotenv.config({ path: filePath });
 
     if (error) {
-      return console.log(error);
+      env = {};
+      if (error.code === 'ENOENT') {
+        console.log(`touch ${ filePath }`);
+      } else {
+        console.log(error);
+      }
     }
+
+    const { parsed: defaultConf } = dotenv.config({ path: 'default.env' });
 
     this.config = { ...defaultConf, ...env };
 
