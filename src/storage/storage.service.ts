@@ -10,14 +10,14 @@ type CreateBlockDto = any;
 export class StorageService {
   constructor(
     @InjectModel('Meta') private readonly metaModel: Model<Meta>,
-    @InjectModel('Block') private readonly blockModel: Model<Block>
+    @InjectModel('Block') private readonly blockModel: Model<Block>,
   ) {}
 
   qtumMeta(update?: any): Promise<Meta> {
     if (!update) {
-      return this.metaModel.getQtumMeta()
+      return this.metaModel.getQtumMeta();
     }
-    return this.metaModel.updateQtumMeta(update)
+    return this.metaModel.updateQtumMeta(update);
   }
 
   addBlock(createBlockDto: CreateBlockDto): Promise<Block> {

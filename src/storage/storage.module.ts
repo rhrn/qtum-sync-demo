@@ -8,7 +8,7 @@ import { MetaSchema } from './schemas/meta.schema';
   imports: [
     MongooseModule.forRoot(process.env.MONGO_URL || 'mongodb://localhost/qtum_test'),
     MongooseModule.forFeature([{ name: 'Block', schema: BlockSchema }]),
-    MongooseModule.forFeature([{ name: 'Meta', schema: MetaSchema }])
+    MongooseModule.forFeature([{ name: 'Meta', schema: MetaSchema }]),
   ],
   providers: [StorageService],
   exports: [StorageService],

@@ -12,15 +12,15 @@ describe('StorageService', () => {
     await Promise.all([
       BlockSchema.remove({}),
       MetaSchema.remove({}),
-    ])
-  })
+    ]);
+  });
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       imports: [
         MongooseModule.forRoot('mongodb://localhost/qtum_test'),
         MongooseModule.forFeature([{ name: 'Block', schema: BlockSchema }]),
-        MongooseModule.forFeature([{ name: 'Meta', schema: MetaSchema }])
+        MongooseModule.forFeature([{ name: 'Meta', schema: MetaSchema }]),
       ],
       providers: [StorageService],
     }).compile();
@@ -32,15 +32,15 @@ describe('StorageService', () => {
     const update = { currentBlock: 1 };
 
     it('qtumMeta(update)', async () => {
-      const result = await storageService.qtumMeta(update)
-      expect(result.currentBlock).toEqual(update.currentBlock)
-    })
+      const result = await storageService.qtumMeta(update);
+      expect(result.currentBlock).toEqual(update.currentBlock);
+    });
 
     it('qtumMeta()', async () => {
-      const result = await storageService.qtumMeta()
-      expect(result.currentBlock).toEqual(update.currentBlock)
-    })
-  })
+      const result = await storageService.qtumMeta();
+      expect(result.currentBlock).toEqual(update.currentBlock);
+    });
+  });
 
   describe('BlockSchema', () => {
     describe('addBlock', () => {
@@ -49,22 +49,22 @@ describe('StorageService', () => {
       it('addBlock(block) add', async () => {
         const block = {
           height,
-          hash: "test_block"
+          hash: 'test_block',
         };
-        const result = await storageService.addBlock(block)
-        expect(result.height).toEqual(block.height)
-        expect(result.hash).toEqual(block.hash)
+        const result = await storageService.addBlock(block);
+        expect(result.height).toEqual(block.height);
+        expect(result.hash).toEqual(block.hash);
       });
 
       it('addBlock(block) upsert', async () => {
         const block = {
           height,
-          hash: "new_test_block"
+          hash: 'new_test_block',
         };
-        const result = await storageService.addBlock(block)
-        expect(result.height).toEqual(block.height)
-        expect(result.hash).toEqual(block.hash)
+        const result = await storageService.addBlock(block);
+        expect(result.height).toEqual(block.height);
+        expect(result.hash).toEqual(block.hash);
       });
-    })
+    });
   });
 });
