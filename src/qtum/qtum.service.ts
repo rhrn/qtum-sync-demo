@@ -12,7 +12,7 @@ export class QtumService {
     private readonly configService: ConfigService,
     private readonly httpService: HttpService
   ) {
-    this.url = this.configService.get('QTUM_URL')
+    this.url = process.env.QTUM_URL;
   }
 
   async rpc(cmd): Promise<json> {
