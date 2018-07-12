@@ -8,6 +8,13 @@ import { MetaSchema } from './schemas/meta.schema';
 describe('StorageService', () => {
   let storageService: StorageService;
 
+  beforeAll(async () => {
+    await Promise.all([
+      BlockSchema.remove({}),
+      MetaSchema.remove({}),
+    ])
+  })
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       imports: [
