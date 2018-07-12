@@ -13,7 +13,7 @@ export class StorageService {
     @InjectModel('Block') private readonly blockModel: Model<Block>
   ) {}
 
-  qtumMeta(update: any): Promise<Meta> {
+  qtumMeta(update?: any): Promise<Meta> {
     if (!update) {
       return this.metaModel.getQtumMeta()
     }
