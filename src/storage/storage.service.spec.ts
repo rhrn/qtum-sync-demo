@@ -26,12 +26,12 @@ describe('StorageService', () => {
 
     it('qtumMeta(update)', async () => {
       const result = await storageService.qtumMeta(update)
-      expect(result.get('currentBlock')).toEqual(update.currentBlock)
+      expect(result.currentBlock).toEqual(update.currentBlock)
     })
 
     it('qtumMeta()', async () => {
       const result = await storageService.qtumMeta()
-      expect(result.get('currentBlock')).toEqual(update.currentBlock)
+      expect(result.currentBlock).toEqual(update.currentBlock)
     })
   })
 
