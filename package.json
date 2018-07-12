@@ -2,7 +2,7 @@
   "name": "qtum-sync",
   "version": "1.0.0",
   "description": "Qtum sync microservice",
-  "main": "index.js",
+  "main": "dist/main.js",
   "dependencies": {
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
