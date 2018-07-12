@@ -1,0 +1,73 @@
+version: '3.6'
+
+volumes:
+  mongo_data:
+  qtum_data:
+
+networks:
+  qtum-net:
+
+services:
+
+  qtum-sync:
+    image: qtum-sync:latest
+    build:
+      context: ../
+    environment:
+      - QTUM_URL=http://test2:test1234@qtum:3889
+      - MONGO_URL=mongodb://mongo1/qtum_development
+    networks:
+      - qtum-net
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '2'
+
+  mongo1:
+    image: mongo
+    networks:
+      - qtum-net
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '2'
+
+  qtum:
+    image: qtum/qtum
+    command: >
+      qtumd
+      -server=1
+      -rpcuser=test2
+      -rpcpassword=test1234
+      -rpcbind=0.0.0.0
+      -rpcallowip=0.0.0.0/0
+      -rpcport=3889
+      -addnode=220.176.167.48
+      -addnode=35.186.175.228
+      -addnode=5.175.19.18
+      -whitelist=127.0.0.1
+      -txindex=1
+      -addressindex=1
+      -timestampindex=1
+      -spentindex=1
+      -zmqpubrawtx=tcp://127.0.0.1:28332
+      -zmqpubhashblock=tcp://127.0.0.1:28332
+      -reindex=1
+      -gen=0
+      -peer=true
+      -addrindex=1
+      -logevents=1
+      -debug=net
+    networks:
+      - qtum-net
+    restart: unless-stopped
+    volumes:
+      - ${VOLUME:-qtum_data}:/root
