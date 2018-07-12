@@ -36,12 +36,28 @@ describe('StorageService', () => {
   })
 
   describe('BlockSchema', () => {
-    it('addBlock(block)', async () => {
-      const block = {
-        hash: "test_block"
-      };
-      const result = await storageService.addBlock(block)
-      expect(result.hash).toEqual(block.hash)
-    });
+    describe('addBlock', () => {
+      const height = 42;
+
+      it('addBlock(block) add', async () => {
+        const block = {
+          height,
+          hash: "test_block"
+        };
+        const result = await storageService.addBlock(block)
+        expect(result.height).toEqual(block.height)
+        expect(result.hash).toEqual(block.hash)
+      });
+
+      it('addBlock(block) upsert', async () => {
+        const block = {
+          height,
+          hash: "new_test_block"
+        };
+        const result = await storageService.addBlock(block)
+        expect(result.height).toEqual(block.height)
+        expect(result.hash).toEqual(block.hash)
+      });
+    })
   });
 });

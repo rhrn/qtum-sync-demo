@@ -20,9 +20,8 @@ export class StorageService {
     return this.metaModel.updateQtumMeta(update)
   }
 
-  async addBlock(createBlockDto: CreateBlockDto): Promise<Block> {
-    const createdBlock = new this.blockModel(createBlockDto);
-    return await createdBlock.save();
+  addBlock(createBlockDto: CreateBlockDto): Promise<Block> {
+    return this.blockModel.addBlock(createBlockDto);
   }
 
 }

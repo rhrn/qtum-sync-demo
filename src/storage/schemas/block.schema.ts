@@ -27,3 +27,10 @@ export const BlockSchema = new mongoose.Schema({
 }, {
   strict: false
 });
+
+BlockSchema.index({ height: 1 });
+
+BlockSchema.statics.addBlock = function(block) {
+  const { height } = block;
+  return this.findOneAndUpdate({ height }, block, { upsert: true, new: true })
+};
